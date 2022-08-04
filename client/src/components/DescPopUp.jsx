@@ -3,22 +3,35 @@ import { BiTask } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import TaskApp from '../pages/TaskApp'
+import { useDispatch } from "react-redux"
+import { addTasksAsync } from '../redux/taskSlice'
 
-const DescPopUp = () => {
+const DescPopUp = ({ closeForm }) => {
     const [click, setClick] = useState(false);
+    const [value, setValue] = useState("");
+
+    const dispatch = useDispatch();
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        dispatch(addTasksAsync({ text: value, }));
+    }
+
     return (
         <>
         <Container>
-            <div>
-            <form>
+            <form onSubmit={onSubmit}>
                 <div className="task__icon">
                     <BiTask style={{backgroundColor: "#fff", fontSize: "2rem"}}/>
+                </div>
+                <div className="close__form" onClick={closeForm}>
+                    X
                 </div>
                 <div className="task__desc">
                     Add a Task
                 </div>
                 <div className="task__input">
-                    <input type="text" placeholder='Description' />
+                    <input type="text" placeholder='Description' value={value} onChange={(e) => setValue(e.target.value)}/>
                 </div>
                 <div className="task__btn_div">
                     <button className='add__task_btn' onClick={() => setClick(!click)}>
@@ -26,7 +39,6 @@ const DescPopUp = () => {
                     </button>
                 </div>
             </form>
-            </div>
         </Container>
         { click && <TaskApp /> }
     </>
@@ -54,6 +66,7 @@ const Container = styled.div`
         background: #fff;
         
         padding: 2rem;
+        position: relative;
 
         .task__icon{
             display: flex;
@@ -63,6 +76,16 @@ const Container = styled.div`
             background: #fff;
 
             margin-bottom: 1rem;
+        }
+
+        .close__form{
+            color: #000;
+            background-color: #fff;
+            font-size: 1.5rem;
+            font-weight: 600;
+            position: absolute;
+            top: 13%;
+            right: 10%;
         }
 
         .task__desc{
