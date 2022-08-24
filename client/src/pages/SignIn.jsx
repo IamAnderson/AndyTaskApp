@@ -53,17 +53,6 @@ const SignIn = () => {
     dispatch(login(userData))
   }
 
-  // const onSubmit = (e) => {
-  //   e.preventDefault()
-
-  //   const userData = {
-  //     email,
-  //     password,
-  //   }
-
-  //   dispatch(login(userData))
-  // }
-
   if (isLoading) {
     return <Spinner />
   }

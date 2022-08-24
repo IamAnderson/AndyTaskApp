@@ -108,4 +108,4 @@ export default authSlice.reducer;
 
 
 //Remember to compare Analysis1 and Analysis2 and figure out where the error in analysis2 is from.
-//The problem was from typo. Spelling PreventDefault as preventDefault //The p is the error.
+//The problem was from typo. Spelling preventDefault as PreventDefault //The P is the error.

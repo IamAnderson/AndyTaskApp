@@ -1,10 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import FadeLoader from "react-spinners/FadeLoader";
+
 
 function Spinner() {
   return (
     <Container>
-        <h1>Loading...</h1>
+      <FadeLoader color="#44f1a6" height={15} width={5} />
     </Container>
   )
 }
@@ -19,8 +21,4 @@ const Container = styled.div`
     height: 100vh;
 
     z-index: 10;
-
-    h1{
-        color: red;
-    }
 `
