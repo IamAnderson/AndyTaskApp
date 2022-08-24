@@ -1,17 +1,19 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Copyright from '../subComponents/Copyright'
 import Texts from '../subComponents/Texts'
 
 const AccessBtn = () => {
+const navigate = useNavigate();
+
   return (
     <>
         <Texts />
         <Container>
-            <Link to='/taskapp' className='taskapp__btn'>
+            <div className='taskapp__btn' onClick={() => navigate("/taskapp")}>
                 TASKAPP
-            </Link>
+            </div>
         </Container>
         <Copyright />
     </>

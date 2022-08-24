@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import TaskApp from '../pages/TaskApp'
 import { useDispatch } from "react-redux"
-import { addTasksAsync } from '../redux/taskSlice'
 
 const DescPopUp = ({ closeForm }) => {
     const [click, setClick] = useState(false);
@@ -14,7 +13,6 @@ const DescPopUp = ({ closeForm }) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(addTasksAsync({ text: value, }));
     }
 
     return (
@@ -40,7 +38,7 @@ const DescPopUp = ({ closeForm }) => {
                 </div>
             </form>
         </Container>
-        { click && <TaskApp /> }
+        { click && <TaskApp /> }x
     </>
   )
 }

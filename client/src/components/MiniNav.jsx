@@ -1,14 +1,28 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { logout, reset } from "../redux/auth/authSlice"
 
 const MiniNav = () => {
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+ 
+
+    const onLogout = () => {
+        dispatch(logout())
+        dispatch(reset())
+        navigate("/")
+    }
+
   return (
     <Container>
         <Link to='/profile' className="profile">
             Profile
         </Link>  
-        <div className="logout">
+        <div onClick={onLogout} className="logout">
             Logout
         </div>
     </Container>

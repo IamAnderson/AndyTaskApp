@@ -1,16 +1,78 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsShieldLock } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Navbar from '../components/Navbar'
 import Copyright from '../subComponents/Copyright'
+import { useNavigate } from 'react-router-dom'
+import { login, reset } from '../redux/auth/authSlice'
+import {useSelector, useDispatch} from 'react-redux'
+import Spinner from '../components/Spinner'
 
 const SignIn = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  })
+  
+  const { email, password } = formData
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
+
+  useEffect(() => {
+    if (isError) {
+      alert(message)
+    }
+
+    if (isSuccess || user) {
+      navigate('/access')
+    }
+
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
+  
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }))
+  }
+  
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    const userData = {
+      email,
+      password,
+    }
+    
+    dispatch(login(userData))
+  }
+
+  // const onSubmit = (e) => {
+  //   e.preventDefault()
+
+  //   const userData = {
+  //     email,
+  //     password,
+  //   }
+
+  //   dispatch(login(userData))
+  // }
+
+  if (isLoading) {
+    return <Spinner />
+  }
+
   return (
     <>
         <Navbar />
           <Container>
-            <form>
+            <form onSubmit={onSubmit}>
               <div className="signin__icon">
                 <BsShieldLock style={{fontSize: "2rem", color: "#44f1a6", border: "1px solid #44f1a6", padding: "0.5rem", borderRadius: "50%"}}/>
               </div>
@@ -18,9 +80,8 @@ const SignIn = () => {
                 Sign In
               </div>
               <div className="signin__form">
-                <input type='email' placeholder='Email Address' required/>
-                <input type='password' placeholder='Password' required/>
-                <span><input type='checkbox' />Remember Me</span>
+              <input type='email' name='email' id='email' value={email} onChange={onChange} placeholder='Email Address' />
+              <input type='password' name='password' id='password' value={password} onChange={onChange} placeholder='Password' />
               </div>
               <div className="signin__btn">
                 <button>
@@ -62,6 +123,7 @@ const Container = styled.div`
 
       .signin__title{
         font-size: 18px;
+        margin-bottom: 1.15rem;
       }
 
       .signin__form{

@@ -3,23 +3,28 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { BiTask } from 'react-icons/bi'
 import MiniNav from './MiniNav'
+import { useSelector } from 'react-redux'
 
 const Navbar = () => {
-const [click, setClick] = useState(false);
+  const { user } = useSelector((state) => state.auth)
+  const [click, setClick] = useState(false);
 
   return (
     <Container>
-      <Link to='/' className='ts__logo'>
-      <BiTask />
+      <Link to={user ? "/access" : "/"} className='ts__logo'>
+        <BiTask />
       </Link>
-      <div className="right__section">
-        <Link to='/taskapp' className='taskapp__nav'>
-          Task App
-        </Link>
-        <span className="auth__display" onClick={() => setClick(!click)}>
-          <div>A</div>
-        </span>
-      </div>
+      {
+        user &&
+          <div className="right__section">
+            <Link to='/taskapp' className='taskapp__nav'>
+              Task App
+            </Link>
+            <span className="auth__display" onClick={() => setClick(!click)}>
+              {user && <div>A</div>}
+            </span>
+          </div>
+      }
 
       {click && (
         <div className='mn__aside'>

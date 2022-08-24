@@ -6,7 +6,7 @@ import AddBtn from '../components/AddBtn'
 import DescPopUp from '../components/DescPopUp'
 import TaskappDetails from '../components/TaskappDetails'
 import { useDispatch, useSelector } from 'react-redux'
-import { getTasksAsync } from '../redux/taskSlice'
+
 
 const TaskApp = () => {
 const [showAddForm, setShowAddForm] = useState(false);
@@ -14,8 +14,8 @@ const tasks = useSelector((state) => state.tasks);
 const dispatch = useDispatch();
 
 useEffect(() => {   
-  dispatch(getTasksAsync());
-}, [dispatch])
+
+}, [])
 
   return (
     <>
@@ -45,7 +45,8 @@ useEffect(() => {
               </div> 
             </div>
             <div className="down__section">
-              <>
+              <TaskappDetails />
+              {/* <>
               { tasks.map((task) => {
                 return(
                   <>
@@ -53,7 +54,7 @@ useEffect(() => {
                   </>
                 )
               }) }
-              </>
+              </> */}
             </div>
           </div>
         </Container>

@@ -1,13 +1,14 @@
 import express from 'express'
 import { getTasks, createTask, deleteTask, updateTask, completeTask } from '../../controller/tasks.js'
+import { protect } from '../../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.get('/', getTasks);
+router.get('/', protect, getTasks);
 
-router.post('/', createTask);
+router.post('/', protect, createTask);
 
-router.put('/:id', updateTask);
+router.put('/:id', protect, updateTask);
 
 router.put('/completed/:id', completeTask);
 

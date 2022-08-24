@@ -1,23 +1,22 @@
 import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import AccessBtn from '../components/AccessBtn'
 import Auth from '../components/Auth'
 import Navbar from '../components/Navbar'
 import Texts from '../subComponents/Texts'
-import AccessPage from './AccessPage'
-import { useSelector } from 'react-redux'
 
-const Main = () => {
+const AccessPage = () => {
   const { user} = useSelector((state) => state.auth) 
-
   return (
     <Container>
-      <Navbar />
-      {<Auth />}
+        <Navbar />
+        {user ? <AccessBtn /> : <Auth />}
     </Container>
   )
 }
 
-export default Main
+export default AccessPage
 
 const Container = styled.div`
 

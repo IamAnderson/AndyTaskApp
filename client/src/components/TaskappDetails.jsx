@@ -3,14 +3,13 @@ import styled from 'styled-components'
 import { RiEdit2Fill } from 'react-icons/ri'
 import { MdDelete } from 'react-icons/md'
 import { useDispatch } from 'react-redux';
-import { deleteTaskAsync, toggleCompleteAsync } from '../redux/taskSlice';
 import UpdateForm from './UpdateForm';
 
-const TaskappDetails = ({ id, text, completed }) => {
+const TaskappDetails = () => {
 const dispatch = useDispatch();
 
 const handleCompleteClick = () => {
-    dispatch(toggleCompleteAsync({ id, completed: !completed, }));
+
   };
 
 // const deleteTask = async id => {
@@ -19,7 +18,7 @@ const handleCompleteClick = () => {
 // }
 
 const handleDelete = () => {
-    dispatch(deleteTaskAsync({ id: id }));
+
 };
 
 const [showEditForm, setShowEditForm] = useState(false);
@@ -28,7 +27,7 @@ const [showEditForm, setShowEditForm] = useState(false);
     <Container>
         <div className="down__section">
             <div className="down__section_div">
-                <span><input type='checkbox' checked={completed} onChange={handleCompleteClick}/>{text}</span>
+                <span><input type='checkbox' onChange={handleCompleteClick}/>Get the Steak at 5pm</span>
                 <div className="tasks__icons">
                     <div className="tasks__edit">
                         <RiEdit2Fill className='tasks__edit_icon' onClick={() => setShowEditForm(!showEditForm)}/>
@@ -40,7 +39,7 @@ const [showEditForm, setShowEditForm] = useState(false);
             </div>
         </div>
         
-        { showEditForm && <UpdateForm closeForm={() => setShowEditForm(!showEditForm)} id={id} text={text}/> }
+        { showEditForm && <UpdateForm closeForm={() => setShowEditForm(!showEditForm)} /> }
     </Container>
   )
 }

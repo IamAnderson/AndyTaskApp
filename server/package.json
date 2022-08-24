@@ -5,16 +5,26 @@
   "main": "Index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon Index.js"
+    "start": "nodemon Index.js",
+    "server": "nodemon server/Index.js",
+    "client": "npm start --prefix ../client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.5.0",
     "nodemon": "^2.0.19"
+  },
+  "devDependencies": {
+    "concurrently": "^7.3.0"
   }
 }

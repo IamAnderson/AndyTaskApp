@@ -22,6 +22,30 @@ DELETE http://localhost:5000/tasks/62e48f1af248f8e5b431a198
 
 
 
+//UserTest
+###
+
+POST http://localhost:5000/user
+
+
+###
+
+
+POST http://localhost:5000/user/login
+
+
+###
+
+
+GET http://localhost:5000/user/me?eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZjBmOTFlNzhlZjU3ZDAzZmU1ZmE4MCIsImlhdCI6MTY1OTk2MTUyMiwiZXhwIjoxNjYyNTUzNTIyfQ.dlYTPE2qLSd_1sjP_hxCyhUsQ35jY5RsJ1koIccM-XU
+
+
+###
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZjM3ZDBiNTJlNzc2YmY3NTJiMTU5MSIsImlhdCI6MTY2MDEyNDQyOCwiZXhwIjoxNjYyNzE2NDI4fQ.DY3AtITWwJiM8gc1JxOB97tn0FNxNjxX8c56CiRE5wQ
+
+
+
+
 
 
 

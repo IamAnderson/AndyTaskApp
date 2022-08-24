@@ -5,6 +5,7 @@ import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import TaskApp from './pages/TaskApp';
 import Profile from './pages/Profile';
+import AccessPage from './pages/AccessPage';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<Main />} exact/>
+          <Route path='/access' element={<AccessPage />} exact/>
           <Route path='/taskapp' element={<TaskApp />} exact/>
           <Route path='/profile' element={<Profile />} exact/>
           <Route path='/signin' element={<SignIn />} exact/>

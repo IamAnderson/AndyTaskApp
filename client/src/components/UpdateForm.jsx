@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useDispatch } from "react-redux"
-import { updateTaskAsync } from '../redux/taskSlice';
 
-const UpdateForm = ({ closeForm, id, text }) => {
+
+const UpdateForm = ({ closeForm }) => {
 const [value, setValue] = useState("");
 const dispatch = useDispatch();
 
 const handleSubmit =(e)=> {
     e.preventDefault();
-    dispatch(updateTaskAsync({ id, text: text }))
 }
 
   return (
