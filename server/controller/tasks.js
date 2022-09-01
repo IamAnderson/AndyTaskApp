@@ -20,16 +20,28 @@ export const getTasks = asyncHandler(async (req, res) => {
 
 //Private (Authentication)
 export const createTask = asyncHandler(async (req, res) => {
-    if(!req.body.text) {
+    if (!req.body.text) {
         res.status(400)
-        throw new Error("Please add a text field")
-    }
+        throw new Error('Please add a text field')
+      }
     
-    const newTask = await Task.create({
+      const newTask = await Task.create({
         text: req.body.text,
         user: req.user.id,
-    })
-    res.status(200).json(newTask);
+      })
+    
+      res.status(200).json(newTask)
+
+    // if(!req.body.text) {
+    //     res.status(400)
+    //     throw new Error("Please add a text field")
+    // }
+    
+    // const newTask = await Task.create({
+    //     text: req.body.text,
+    //     user: req.user.id
+    // })
+    // res.status(200).json(newTask);
 
     // const taskDetail = (req.body)
 
@@ -45,30 +57,57 @@ export const createTask = asyncHandler(async (req, res) => {
 
 //Private (Authentication)
 export const updateTask = asyncHandler(async (req, res) => {
-    const task = Task.findById(req.params.id)
+
+    // const task = await Task.findById(req.params.id)
+
+    // if (!task) {
+    //   res.status(400)
+    //   throw new Error('Task not found')
+    // }
+  
+    // // Check for user
+    // if (!req.user) {
+    //   res.status(401)
+    //   throw new Error('User not found')
+    // }
+  
+    // // Make sure the logged in user matches the task user
+    // if (task.user.toString !== req.user.id) {
+    //   res.status(401)
+    //   throw new Error('User not authorized')
+    // }
+  
+    // const updatedTask = await Task.findByIdAndUpdate(req.params.id, req.body, {
+    //   new: true,
+    // })
+  
+    // res.status(200).json(updatedTask)
+
+
+    const task = await Task.findById(req.params.id)
 
     if(!task){
         res.status(400)
         throw new Error("Task not found")
     }
 
-    const user = await User.findById(req.params.id)
-
     //Check for user
-    if(!user){
+    if(!req.user){
         res.status(401)
         throw new Error("User not found")
     }
 
     //Make sure logged in user matches the task user
-    if(task.user.toString() !== user.id){
+    if(task.user.toString() !== req.user.id) {
         res.status(401)
         throw new Error("User not authorized")
     }
 
-    const editTask = await Task.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    const editTask = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true, })
     res.status(201).json(editTask)
 
+
+    //w/o auth
     // try {
     //     let editTask = await Task.updateOne(req.params, {$set:req.body})
     //     res.status(201).json(editTask)
@@ -98,29 +137,32 @@ export const completeTask = asyncHandler(async (req, res) => {
 
 //Private (Authentication)
 export const deleteTask = asyncHandler(async (req, res) => {
-    const task = Task.findById(req.params.id)
-    if(!task){
-        res.status(400)
-        throw new Error("Task not found")
+
+    const task = await Task.findById(req.params.id)
+
+    if (!task) {
+      res.status(400)
+      throw new Error('Task not found')
     }
-
-    const user = await User.findById(req.params.id)
-
-    //Check for user
-    if(!user){
-        res.status(401)
-        throw new Error("User not found")
+  
+    // Check for user
+    if (!req.user) {
+      res.status(401)
+      throw new Error('User not found')
     }
-
-    //Make sure logged in user matches the task user
-    if(task.user.toString() !== user.id){
-        res.status(401)
-        throw new Error("User not authorized")
+  
+    // Make sure the logged in user matches the task user
+    if (task.user.toString() !== req.user.id) {
+      res.status(401)
+      throw new Error('User not authorized')
     }
-
+  
     await task.remove()
+  
     res.status(200).json({ id: req.params.id })
 
+
+    //w/o auth
     // const task = await Task.findByIdAndDelete(req.params.id)
     // res.status(200).json({task: task, message: "Task has been deleted"})
 

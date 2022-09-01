@@ -12,6 +12,7 @@ router.put('/:id', protect, updateTask);
 
 router.put('/completed/:id', completeTask);
 
-router.delete('/:id', deleteTask);
+router.delete('/:id', protect, deleteTask);
+
 
 export default router;
