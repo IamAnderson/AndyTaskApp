@@ -4,7 +4,7 @@
 <Img align="right" width="500" src="https://www.mygo.ge/uploads/blog/1584023795.jpg"  alt="" />
 <p align="left"> <a href="https://twitter.com/iam___andy" target="blank"><img src="https://img.shields.io/twitter/follow/iam___andy?logo=twitter&style=for-the-badge" alt="iam___andy" /></a> </p>
 
-- 🔭 I’m currently working on [Andy's Taskapp](https://andytaskapp.herokuapp.com/)
+- 🔭 I’m currently working on [Andy's Taskapp](https://andytaskapp.vercel.com/)
 
 - 🌱 I’m currently learning **Solidity**
 
